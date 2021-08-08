@@ -43,11 +43,11 @@ class NewVisitorTest(unittest.TestCase):
         inputbox.send_keys(Keys.ENTER)
         time.sleep(1)
 
-        table
-        self.browser.find_element_by_id('id_list_table')
+        table = self.browser.find_element_by_id('id_list_table')
         rows = table.find_elements_by_tag_name('tr')
-        self.assertTrue(
-             any(row.text == '1: Купить павлиньи перья' for row in rows)
+        self.assertTrue( \
+            any(row.text == '1: Купить павлиньи перья' for row in rows), \
+            "Новый элемент списка не появился в таблице" \
         )
 
         # Текстовое поле по-прежнему приглашает ее добавить еще один элемент. Она вводит "Сделать мушку из павлиньих перьев".
