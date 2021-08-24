@@ -1,3 +1,4 @@
+import os
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium import webdriver
 from selenium.common.exceptions import WebDriverException
@@ -13,6 +14,9 @@ class NewVisitorTest(StaticLiveServerTestCase):
     def setUp(self):
         '''установка'''
         self.browser = webdriver.Chrome()
+        staging_server = os.getenv('STAGING_SERVER')
+        if staging_server:
+            self.live_server_url = 'http://' + staging_server
 
     def tearDown(self):
         '''демонтаж'''
@@ -129,7 +133,7 @@ class NewVisitorTest(StaticLiveServerTestCase):
         inputbox = self.browser.find_element_by_id('id_new_item')
         self.assertAlmostEqual(
             inputbox.location['x'] + (inputbox.size['width'] / 2),
-            512,
+            638,
             delta=10
         )
 
@@ -141,7 +145,7 @@ class NewVisitorTest(StaticLiveServerTestCase):
         inputbox = self.browser.find_element_by_id('id_new_item')
         self.assertAlmostEqual(
             inputbox.location['x'] + inputbox.size['width'] / 2,
-            512,
+            638,
             delta=10
         )
 
